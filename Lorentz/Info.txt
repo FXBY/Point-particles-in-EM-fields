@@ -1,0 +1,2 @@
+In these  simulations only the Lorentz force is considered and no back coupling of the point particle as a source for the EM fields, 
+i.e. all fields are trated as external and there is no back reaction.
