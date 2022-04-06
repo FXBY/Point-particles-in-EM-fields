@@ -1,0 +1,664 @@
+=====================================
+=                                   =
+=            Simulation             =
+=                                   =
+=   klassischer elektrodynamischer  =
+=                                   =
+=       Vielteilchensysteme         =
+=                                   =
+=   - Anleitung und Hilfe zum -     =
+=      Programm SIM-EDVS.EXE        =
+=                                   =
+=====================================
+
+
+Inhaltsverzeichnis
+==================
+
+1. Einleitung
+
+2. Programmstart
+
+   2.1 Generelle Informationen
+
+   2.2 Erste Schritte
+
+3. Erzeugen von Elektronen und Protonen
+
+4. Das Menü
+
+   4.1 Das Menü der physikalischen Parameter
+
+       4.1.1 Die elektrische Kraft F(E)
+
+       4.1.2 Die magnetische Kraft F(B)
+
+       4.1.3 Die Stromstärke I
+
+       4.1.4 Die Geschwindigkeit v
+
+   4.2 Das Menü der Simulationsparameter
+
+       4.2.1 Die Metrik M
+
+       4.2.2 Das Zeitintervall T (Time)
+
+       4.2.3 Der Stoßparameter A (Absorbtion)
+
+   4.3 Die Exponentialschreibweise
+
+5. Weitere Simulationssteuerungen
+
+   5.1 Die STOPP - Funktion
+
+   5.2 Die FREEZE - Funktion
+
+   5.3 Die CURVE - Funktion
+
+6. Voreingestellte Szenarien (Presets)
+
+   6.1 Szenario: Elektronengitter
+
+   6.2 Szenario: Protonengitter
+
+   6.3 Szenario: Elektronen-Protonen-Kristall
+
+   6.4 Szenario: F(B)-Wirkung auf Elektronen
+
+   6.5 Szenario: F(B)-Wirkung auf Protonen
+
+   6.6 Szenario: F(B)-Wirkung auf Elektronen (x4)
+
+   6.7 Szenario: Wasserstoffatom (Bahn mittelgroß)
+
+   6.8 Szenario: Wasserstoffatom (Bahn groß)
+
+   6.9 Szenario: Wasserstoffatom (Bahn klein)
+
+   6.10 Szenario: Metallgitter
+
+
+
+
+1. Einleitung
+=============
+
+Die mit dem Programm SIM-EDVS.EXE erstellten Simulationen behandeln
+das physikalische Thema der Vielteilchensysteme aus der Perspektive
+der klassischen (nichtrelativistischen) Elektrodynamik. Der theore-
+tische sowie mathematische Hintergrund dieser Simulationen ist mei-
+ner Arbeit "Theoretische Betrachtungen elektrodynamischer Vielteil-
+chensysteme" zu entnehmen.
+Simuliert wird in einem dreidimensionalen Anschauungsraum. Die
+räumliche Tiefe wird mit unterschiedlichen Farbgebungen gestalltet.
+Diese Farbgebung orientiert sich an der Grauabstufung des Raumes
+(hellgrau/weiß: vorne, dunkelgrau: hinten).
+
+
+2. Programmstart
+================
+
+
+2.1 Generelle Informationen
+---------------------------
+
+Das Programm SIM-EDVS.EXE kann grundsätzlich in jeder DOS,
+WINDOWS 95/98 und WINDOWS NT Umgebung gestartet werden. Da es je-
+doch für die Grafik und Speicherroutinen selbsterstellten Assembler
+Code (Maschinensprache) enthält, kann es vorkommen, dass Viren-
+schutzprogramme es als Virus ansehen, oder dass sich UNIX-basierte
+Betriebssysteme mit Zugriffsschutzverletzungen melden könnten.
+Die einzige Anforderung an den Rechner ist ein 286 oder höher. Je
+höher die Rechenleistung, desto mehr Teilchen können effektiv simu-
+liert werden. Die Standardeinstellungen der Metrik M und Time T
+(vgl. 4.2.1 und 4.2.2) sind auf einen Athlon XP 1700+ so angepasst,
+dass die Genauigkeit der Simulation hinreichend ist und die Simula-
+tion bei ca. 100-110 (max. 1000 erzeugbar) simulierten Teilchen
+flüssig läuft.
+
+
+2.2 Erste Schritte
+------------------
+
+Nach dem starten von SIM-EDVS erscheint ein Titelbildschirm. Dieser
+informiert vorallem über die zwei zu erst wichtigsten Tasten:
+           - [Q] für das Beenden des Programms
+           - [H] für das Aufzeigen der Tastenbelegung als Hilfe.
+Mit der Betätigung einer beliebigen Taste außer [Q] gelangt man in
+das eigentliche Programm. Betätigt man [Q], so wird das Programm
+beendet.
+Nach dem Verlassen des Titelbildschirms sieht man zuerst nur den
+leeren Raum, in dem sich während der Simulationen die Teilchen be-
+wegen werden. Man hat nun zwei generelle Möglichkeiten. Entweder
+man startet ein voreingestelltes Szenario (vgl. Kapitel 6) oder
+entwickelt selbst eins. Wir werden mit dem Selbsterstellen von Si-
+mulationen beginnen, um so die Funktionen des Programms schrittwei-
+se zu erlernen.
+
+
+
+3. Erzeugen von Elektronen und Protonen
+=======================================
+
+Mit der Taste [P], wie positiv oder Proton, kann man in dem leeren
+Raum positive Ladungen bzw. Protonen (rote Punkte) erzeugen. Mit
+[N], wie negativ, kann man negative Ladungen bzw. Elektronen erzeu-
+gen (blaue Punkte). Die physikalischen Werte, wie Masse und Elemen-
+tarladung eines Protons bzw. Elektrons sind dem Programm bekannt
+und können auch nicht verändert werden.
+Die Teilchen werden über einen Zufallsgenerator im Raum plaziert.
+Kaum sind zwei Teilchen vorhanden, so wirkt die elektrische Kraft
+und sie fangen an sich zu bewegen. Die Protonen bewegen sich wegen
+ihrer ca. 1837x größeren Masse langsamer als die Elektronen. Die
+Elektronen hingegen können so stark beschleunigen, dass sie auf dem
+Bildschirm wegen ihrer hohen Geschwindigkeit nicht mehr oder kaum
+zu sehen sind. Wie man diesem "Protonenproblem" und "Elektronenpro-
+blem" begegnen kann, erfahren wir in den späteren Kapiteln 4.2, 5.
+
+
+
+4. Das Menü
+===========
+
+Zusätzlich zu dem Erstellen von Elektronen und Protonen haben wir
+die Möglichkeit z. B. die auf sie einwirkenden Kräfte, ihre Ge-
+schwindigkeiten und Stromstärken quantitativ zu erfassen. Wir
+können sie auch ändern. Es ist uns ebenfalls möglich die Simula-
+tionsparameter zu sehen und zu ändern.
+All diese Aufgaben werden durch ein dynamisches Menü bewältigt,
+dessen Komponenten jeweils auf dem Bildschirm mit den Menütasten
+aktiviert und deaktiviert werden können. Nach dem ersten betätigen
+einer Menütaste erscheint die zugehörige Menükomponente in gelb
+markiert, was heißt, dass sie aktiv ist. Dies bedeutet, dass mit
+den Menüfunktionstasten [+] und [-] Veränderungen an ihr gemacht
+werden können. Die Bedeutung dieser Veränderungen ist komponenten-
+spezifisch und wird in den zugehörigen Kapiteln behandelt. Neben
+aktiven Menükomponenten, gibt es auch passive. Diese sind weiß und
+zeigen nur die momentanen Werte an. Eine aktive Komponente wird
+passiv, falls man eine andere Menükomponente aktiviert oder de-
+aktiviert. Das deaktivieren erfolgt durch das nochmalige betätigen
+der zugehörigen Menütaste.
+Im Allgemeinen sieht eine Menükomponente folgendermaßen aus:
+
+|X: |Wert |S |
+
+X    - ist der Menübezeichner, wie z. B. "v" für Geschwindigkeit,
+       "M" für Metrik, etc.
+Wert - ist ein Zahlenwert
+S    - sind spezifische Zusätze, wie der Multiplikator "x 1" bei
+       den Kräften
+
+
+4.1 Das Menü der physikalischen Parameter
+-----------------------------------------
+
+Das eigentliche Menü kann man in zwei Teile unterteilen: das Menü
+der physikalischen Parameter, welches sich im unteren Teil des
+Bildschirms befindet und das Menü der Simulationsparameter, wel-
+ches sich im oberen Teil des Bildschirms befindet.
+Das Menü der physikalischen Parameter besitzt 4 Menükomponenten:
+- Die elektrische Kraft F(E)
+- Die magnetische Kraft F(B)
+- Die Stromstärke I
+- Die Geschwindigkeit v.
+
+
+4.1.1 Die elektrische Kraft F(E)
+................................
+
+|F(E): |Wert in Exponetialschreibweise und Einheit N |Multiplikator |
+
+N - Newton
+
+Diese Menükomponente zeigt die momentan auf ein selektiertes Teil-
+chen wirkende elektrische Kraft. Das selektierte Teilchen ist durch
+das gelbe Fadenkreuz zu erkennen.
+Die wirkende elektrische Kraft kann mit der Änderung des Multipli-
+kators (Standardwert 1) vervielfacht oder gar auf Null gesetzt wer-
+den. Diese Vervielfachung bezieht sich nicht nur auf das selektier-
+te sondern auf alle Teilchen.
+
+[+] - erhöht den Multiplikatorwert um 10 (max. 491)
+[-] - verringert den Multiplikatorwert um 1 (min. 0)
+
+
+4.1.2 Die magnetische Kraft F(B)
+................................
+
+|F(B): |Wert in Exponetialschreibweise und Einheit N |Multiplikator |
+
+N - Newton
+
+Diese Menükomponente verhält sich wie F(E), außer dass sie die ma-
+gnetische Kraft anzeigt und verändert.
+
+
+4.1.3 Die Stromstärke I
+.......................
+
+|I: |Wert in Exponetialschreibweise und Einheit A |s0: E Wert|
+
+A  - Ampere
+E  - Exponent (der Basis Zehn)
+s0 - Bezugsweg
+
+Die Stromstärke I gibt die relative Stromstärke des selektierten
+Teilchens an. Diese Stromstärke wird relativ zu einem Bezugsweg s0
+(Standardwert: 1m) angegeben (vgl."Theoretische Betrachtungen elek-
+trodynamischer Vielteilchensysteme"). Durch dessen Änderung, kann
+man auch die relative Stromstärke - wiederum wirksam für alle
+Teilchen - ändern. Um es zu präzisieren: man ändert den Exponen-
+ten E von s0. Die Änderung der relativen Stromstärke wirkt sich
+auf F(B) aus.
+
+[+] - Erhöht den Exponenten E vom Bezugsweg s0 um 1 (max. 36)
+[-] - Verringert den Exponenten E vom Bezugsweg s0 um 1 (min. -5)
+
+Diese Art der Berechnung von I und F(B) ist die ungenauere. Die
+bessere Variante ist jedoch zu rechenaufwendig, um sie effektiv in
+der Simulation umsetzen zu können (vgl."Theoretische Betrach-
+tungen elektrodynamischer Vielteilchensysteme").
+
+
+4.1.4 Die Geschwindigkeit v
+...........................
+
+|v: |Wert in Exponetialschreibweise und Einheit m/s |
+
+m/s - Meter je Sekunde
+
+Diese Menükomponente gibt die Momentangeschwindigkeit des selek-
+tierten Teilchens wieder. Es können zwar keine Wertänderungen vor-
+genommen werden, jedoch trägt diese Menükomponente eine wichtige
+Funktion: mit ihr kann man andere Teilchen selektieren.
+
+[+] - selektieren des in der Reihenfolge nächsten Teilchens
+[-] - selktieren des in der Reihenfolge vorherigen Teilchens
+
+Ändert sich das selektierte Teilchen nicht (Fadenkreuz visiert
+stets das gleiche Teilchen an), so ist man mit [+] beim letzen
+oder mit [-] beim ersten Teilchen angekommen. Einen zyklischen
+Durchlauf gibt es nicht.
+
+
+4.2 Das Menü der Simulationsparameter
+-------------------------------------
+
+Dieses Menü befindet sich im oberen Teil des Bildschirms und
+beeinflusst die Simulationsparameter, welche vor allem dazu dien-
+lich sind, die Simulationen an die unterschiedlichen Rechenlei-
+stungen anzupassen. Hier kann z. B. das in Kapitel 3 genannte Elek-
+tronen- oder Protonenproblem gelöst werden.
+Es besitzt drei Menükomponenten:
+- Die Metrik M
+- Das Zeitintervall T (Time)
+- Der Stroßparameter A (Absorbtion)
+
+
+4.2.1 Die Metrik M
+..................
+
+|M: |Wert in Exponetialschreibweise und Einheit m |
+
+m - Meter
+
+Die Metrik gibt den Abstand (in Metern) zwischen zwei Pixeln an.
+Das Programm rechnet intern nur mit einheitslosen ganzzahligen Grö-
+ßen. So können sich die Teilchen in einem 320*200*300 Kubikeinhei-
+ten großen Raum bewegen. Die Metrik beschreibt dann die Einheits-
+größe in Metern und rechnet den sichtbaren Raum auf den physikali-
+schen um. Ihre Wertänderung hat einen Einfluss auf die elektrische
+und magnetische Kraft. Des Weiteren beeinflusst sie die sichtbare
+Geschwindigkeit/Bewegung der Teilchen.
+Mit Änderungen in der Metrik lässt sich in einer Simulation zeigen,
+wie groß die Kräfte auf Teilchen im z. B. subatomaren, atomaren
+oder gar makoskopischen bis interstellaren Raum sind. Der Standard-
+wert liegt dabei bei 1*10^(-11)m (0,1 Angström), was dem subatoma-
+ren Raum entspricht (Atomradien gehen von ca. 0,25 bis 3 Angström).
+
+[+] - vergrößert den Wert um das 1,5-fache
+[-] - verkleinert den Wert um das 1,5-fache
+
+Es gibt keine (programmierte) obere bzw. untere Grenze. Man muss
+bei extremen Änderungen jedoch darauf gefasst sein, dass das Pro-
+gramm mit einem Gleitkommafehler abstürtzt. Ein Absturz kann auch
+bei bestimmten Wertkombinationen mit anderen Größen wie z. B.
+Time, Absorbtion oder den Kräftemultiplikatoren auftreten.
+
+
+4.2.2 Das Zeitintervall T (Time)
+................................
+
+|T: |Wert in Exponetialschreibweise und Einheit s |
+
+s - Sekunde
+
+Das Zeitintervall mit dem Standardwert 1*10^(-12)s gibt die ver-
+strichene physikalische Zeit pro Simulationsschritt an. Ein Simula-
+tionsschritt ist hierbei eine komplette Berechnung der Kräfte, Ge-
+schwindigkeiten und Orte aller Teilchen. Physikalisch bedeutet
+dies, dass ein Teilchen in einem Simulationsschritt den Weg
+
+     (errechnete Momentangeschwindigkeit)*(Zeitintervall T)
+
+zurücklegt. Je kleiner also das Zeitintervall gewählt wird, desto
+mehr stimmen die simulierten Wege und Werte mit den exakten über-
+ein. Je kleiner aber das Zeitintervall gewählt wird, desto langsa-
+mer läuft die Simulation und desto langsamer bewegen sich die Teil-
+chen auf dem Bildschirm. Analog verhält es sich natürlich umge-
+kehrt. Aus diesem Grund ist es mit Time möglich das "Elektronen-
+problem" oder "Protonenproblem" zu lösen. Im Gegensatz zur Metrik
+greift Time nicht in die direkte Größe der physikalischen Werte
+ein, sondern beeinflusst nur ihre Genauigkeit.
+Weiterhin kann Time dazu benutzt werden, die Simulationsgeschwin-
+digkeit auf schnellere oder langsamere Rechner anzupassen. Dies
+liegt daran, dass schnelle Rechner mehr Simulationsschritte pro
+Sekunde berechnen können als langsame. Die Standardwerte sind auf
+einen Athlon XP 1700+ eingestellt (vgl. Kapitel 2.1).
+Man sollte hinsichtlich der sichtbaren Teilchenbewegung auch
+wissen, dass Metrik und Time in ähnlichen Größenmaßstäben liegen
+sollten, falls man eine sichtbare Bewegung wünscht. Wenn man Metrik
+und Time beide gleichmäßig erhöht oder erniedrigt, bleibt die Ge-
+schwindigkeit der sichtbaren Bewegung gleich.
+
+[+] - vergrößert den Wert um das 1,5-fache
+[-] - verkleinert den Wert um das 1,5-fache
+
+Genauso wie bei der Metrik gibt es keine (programmierte) obere und
+untere Grenze für die Werte. Es kann also bei bestimmten Werten zu
+Programmabstürzen kommen (vgl. Kapitel 4.2.1).
+
+
+4.2.3 Der Stoßparameter A (Absorbtion)
+......................................
+
+|A: |Wert in %|
+
+Der Stoßparameter A gibt den prozentualen Anteil des elastischen
+Stoßes bei der Kollision eines Teilchens mit der Wand wieder. Ver-
+einfacht ausgedrückt: ein Teilchen besitzt nach einer Wandkolli-
+sion nur so viel Prozent seiner vorherigen Geschwindigkeit, wie A
+angibt. Der Standardwert liegt bei 90%. Dieser Wert repräsentiert
+einen quasi elastischen Stoß und sorgt so dafür, dass plötzlich
+stark beschleunigte Teilchen, deren Bewegung nicht mehr sichtbar
+wird, sich nach einer gewissen Zeit zu einer beobachtbaren Bewe-
+gung abbremsen. Bei einem Wert von 100% entwickelt sich das System
+in den meißten Fällen zu einem nicht mehr am Bildschirm beobachtba-
+ren Chaos in der Bewegung.
+
+[+] - vergrößert den Wert um 1 (max. 100%)
+[-] - verkleinert den Wert um 1 (min. 0%)
+
+
+4.3 Die Exponentialschreibweise
+-------------------------------
+
+Die Werte in Exponentialschreibweise, d. h. in der Schreibweise mit
+abgetrennten Zehnerpotenzen, werden folgendermaßen auf dem Bild-
+schirm angezeigt:
+
+  x.yyyyyyyyyyyyyyE+zzzz
+
+x - Ziffer von 0 bis 9 der Vorkommastelle
+y - Mantisse oder Nachkommastellen (14 Stellen)
+E - Zeichen für den Exponenten (der Basis Zehn)
++ - Vorzeichen des Exponenten
+z - Wert des Exponenten (4 Stellen)
+
+Die angezeigte Zahl entspricht somit folgender Zahl in klassischer
+Exponentialschreibweise:
+
+  x,yyyyyyyyyyyyyy*10^(+zzzz)
+
+Betrachtet man nun z. B. den Standardwert der Metrik mit
+1*10^(-11)m, so fällt auf, dass auf dem Bildschirm nicht dieser
+Wert sondern 9.99999996004197E-0012 = 9,99999996004197*10^(-12)
+ausgegeben wird. Solche Ungenauigkeiten ergeben sich aus der Um-
+rechnung von binären Zahlen in Dezimalzahlen und umgekehrt.
+
+
+
+5. Weitere Simulationssteuerungen
+=================================
+
+Neben dem Menü gibt es noch drei universelle Funktionen, die die
+Simulation steuern können:
+- Die STOPP - Funktion
+- Die FREEZE - Funktion
+- Die CURVE - Funktion
+
+
+5.1 Die STOPP - Funktion
+------------------------
+
+STOPP wird durch die Taste [S] ausgelöst. Wie der Name es sagt,
+stoppt diese Funktion alle Teilchen, in dem sie die Geschwindigkei-
+ten aller Teilchen auf Null setzt. Sie greift so unmittelbar in die
+Simulation ein.
+Diese Funktion ist vorwiegend dann praktisch, wenn die Teilchenbewe-
+gung nicht mehr beobachtbar wird.
+
+
+5.2 Die FREEZE - Funktion
+-------------------------
+
+FREEZE (einfrieren) wird durch die Taste [F] aktiviert. Sie verhält
+sich ähnlich wie STOPP. Der einzige und wichtige Unterschied ist,
+dass FREEZE die Zeit einfriert und nicht die Geschwindigkeiten auf
+Null setzt.
+Diese Funktion hat vielerlei praktischen Nutzen, ob zum Festhalten
+einer Situation und Aufnahme der Daten, oder Erstellen von eigenen
+Szenarien, ohne dass die Teilchen sich bereits beim erstellen ge-
+genseitig beeinflussen.
+Will man die Simulation fortsetzen, so muss [F] noch einmal betä-
+tigt werden.
+
+
+5.3 Die CURVE - Funktion
+------------------------
+
+CURVE (Kurve, hier Spur) wird durch die Taste [C] aktiviert. Sie
+zeichnet die Bahn bzw. Spur eines Teilchens oder aller Teilchen
+während ihrer Bewegung auf dem Bildschirm. Ob es sich um ein Teil-
+chen oder um alle Teilchen handelt, entscheidet sich danach, ob man
+sich im Menü befindet oder nicht. Im Menü der physikalischen Para-
+meter (vgl. 4.1), in dem man sich genau dann befindet, wenn eine
+seiner Komponenten aktiv ist, wird ein Teilchen selektiert. Aus
+diesem Grund wird hier nur die Spur eines einzelnen Teilchens ge-
+zeichnet. Befindet man sich in keinem Menü (keine aktive Menükompo-
+nente), so werden die Spuren aller Teilchen gezeichnet. Im Menü der
+Simulationsparameter (vgl. 4.2), in dem man sich wiederum befindet,
+wenn eine seiner Komponenten aktiv ist, funktioniert die CURVE-
+Funktion nicht.
+Möchte man die Spuren löschen oder die Funktion abschalten, muss
+man [C] erneut betätigen.
+
+
+
+6. Voreingestellte Szenarien (Presets)
+======================================
+
+Wie bereits in Kapitel 2.2 erwähnt wurde, gibt es neben der Mög-
+lichkeit selbst Szenarien zu erstellen auch voreingestellte Sze-
+narien. Diese zeichnen sich vor allem dadurch aus, dass in ihnen
+die Teilchen regelmäßig angeordnet sind, wie man es im Programm
+selbst nicht durch [P] und [N] bewerkstelligen kann.
+Die Szenarien werden mit den Tasten [0] bis [9] aktiviert und
+befinden sich nach Aktivierung im eingefrorenen Zustand. Damit also
+ein Szenario beginnen kann, muss [F] betätigt werden.
+Durch die Aktivierung eines Szenarios werden oftmals die Einstel-
+lungen von Metrik M, Time T, Absorb A sowie F(E), F(B) und I verän-
+dert. Des Weiteren kommt es zum Löschen aller vorherig erstellten
+Teilchen und ihrer Daten. Die Funktion CURVE wird abgeschaltet.
+Die zu jedem Szenario gehörende Aktivierungstaste sowie die vom
+Standardwert aus betrachtet geänderten Werte werden im Kapitelan-
+fang in einer Kurzübersicht zusammengestellt.
+
+
+6.1 Szenario: Elektronengitter
+------------------------------
+
+Taste: [1]
+A    : 50%
+
+In diesem Szenario werden Elektronen in einem 4x4x4 Elektronenqua-
+der mit einem Abstand von 2*10^(-10)m horizontal und vertikal sowie
+5*10^(-10)m in die Tiefe angeordnet. Hier können die Abstoßungs-
+kräfte der Elektronen und ihre Anordnung an der Oberfläche des
+Raumes, wie es bei einem negativ geladenen Quader der Fall wäre,
+beobachtet werden. Zu bemerken ist die verstärkte Anordnung in den
+Ecken (größtmöglicher Abstand) und das Einsperren einiger Elektro-
+nen auf den Raumflächen. Da trotz Anordnung die Elektronen ständig
+in Bewegung sind, kann man zeigen, dass eine Ladungsverteilung bzw.
+Ladungsdichte nie konstant sondern von Fluktuationen begleitet
+ist. Die Schlussfolgerung, welche man daraus ziehen kann, sind z. B.
+die Grenzen der Ladungsmodelle der Elektrostatik.
+
+
+6.2 Szenario: Protonengitter
+----------------------------
+
+Taste: [2]
+A    : 50%
+
+Dieses Szenario ist analog zum Elektronengitter. Der einige Unter-
+schied ist, dass anstatt von Elektronen Protonen verwendet werden.
+Die Schlusfolgerungen sind somit die gleichen. Zusammen mit dem
+Szenario Elektronengitter kann aber auf die Symmetrie zwischen den
+Ladungen verwiesen werden.
+
+
+6.3 Szenario: Elektronen-Protonen-Kristall
+------------------------------------------
+
+Taste: [3]
+T    : 1*10^(-12,5)s
+A    : 50%
+
+In diesem Szenario wird ein Kristall aus einem Protonengitter ana-
+log zu 6.2 und einem 3x3x3 Elektronengitter mit den Abständen wie
+in 6.1, welcher in dem Protonengitter eingebettet ist, darge-
+stellt. Bemerkenswert ist die anfängliche Bewegung der Elektronen.
+Der allmäliche Zerfall des Kristalls und seine Instabilität zei-
+gen, dass bereits leichte Asymmetrien in den elektrischen Kraft-
+feldern, wie sie durch die Kristallränder gegeben sind, keine sta-
+bile Bindung ermöglichen.
+Hier ist nun eine Diskussion möglich, ob die Ionenbindung, wie sie
+in Kristallen vorherrscht, durch die klassische Elektrodynamik be-
+schreibbar ist. Dabei sollte auch untersucht werden, wo die Gren-
+zen des hier dargestellten Elektronen-Protonen-Kristalls liegen und
+wie weit die Resultate so für die obere Diskussion relevant sind.
+
+
+6.4 Szenario: F(B)-Wirkung auf Elektronen
+-----------------------------------------
+
+Taste: [4]
+A    : 100%
+F(E) : x0
+
+Dieses Szenario dient dazu, die eigentlich schwache magnetische
+Kraftwirkung auf Elektronen zu demonstrieren. Es werden zwei Elek-
+tronen in einem Abstand von einem Angström (1*10^(-10)m) nebenein-
+ander plaziert. Beide besitzen entgegengesetze vertikale Geschwin-
+digkeiten von 4*10^11m/s. Die elektrische Kraft wird durch die
+Nullsetzung des Multiplikators ausgeschaltet.
+Es ist jeweils eine schwache Ablenkung zu den Seiten bemerkbar.
+Für weiteres Experimentieren kann man den relativen Bezugsweg s0
+oder den Kraftmultiplikator von F(B) verändern.
+
+
+6.5 Szenario: F(B)-Wirkung auf Protonen
+---------------------------------------
+
+Taste: [5]
+A    : 100%
+F(E) : x0
+s0   : 1*10^(-5)m
+
+Dieses Szenario verhält sich analog zum Szenario in 6.4. Da jedoch
+bei Standard-s0 fast kein Effekt der magnetischen Ablenkung zu beo-
+bachten ist, wurde s0 auf seinen Maximalwert erhöht. Die Ablenkung
+wird dadurch sehr groß.
+
+
+6.6 Szenario: F(B)-Wirkung auf Elektronen (x4)
+----------------------------------------------
+
+Taste: [6]
+A    : 100%
+F(E) : x0
+F(B) : x4
+s0   : 1*10^(-3)m
+
+In diesem Szenario wird nochmals die gegenseitige Ablenkung von
+Elektronen dargestellt. Diesmal besitzen sie aber entgegengesetzte
+Diagonalgeschwindigkeiten von 1,41*10(-10,7)m/s, F(B) wirkt viermal 
+so stark und s0 wird geändert (ohne die Änderung von s0 ist der
+Schnörkeleffekt nicht beobachtbar). Zu beobachten ist eine ver-
+schnörkelte Bewegung der Elektronen. Es empfielt sich hier beson-
+ders die CURVE-Funktion einzuschalten.
+Bei der Variation von Parametern, wie z. B. s0 oder den Multiplika-
+tor für F(B), ist besonders in diesen Szenario mit Abstürzen des
+Programms zu rechnen (Gleitkommafehler).
+
+
+6.7 Szenario: Wasserstoffatom (Bahn mittelgroß)
+-----------------------------------------------
+
+Taste: [7]
+A    : 100%
+
+In diesem Szenario wird ein Wasserstoffatom nachgebildet. Das Pro-
+ton befindet sich in der Mitte des Raumes. Das Elektron besitzt ei-
+nen Abstand von 2*10^(-10)m zum Proton und eine Geschwindigkeiten
+von ca. 2,45*10^11m/s. Die Bahn, die beobachtet werden kann, ist
+elliptisch. Diese Ellipse dreht sich mit der Zeit um das Proton.
+Nach einer Weile fängt sich das Proton an zu bewegen. Man kann dann
+beobachten, dass das Elektron seine regelmäßige Bahn um das Proton
+auch verlassen kann.
+Hier kann ein Verweis auf Newtons Gravitationsgesetz geschehen und
+Planetenbahnen mit den Elektronenbahnen verglichen werden.
+
+
+6.8 Szenario: Wasserstoffatom (Bahn groß)
+-----------------------------------------
+
+Taste: [8]
+A    : 100%
+
+Dieses Szenario ist außer dem Elektronenabstand von 5*10^(-10)m und
+der Startgeschwindigkeit von 1,73*10^11m/s das gleiche wie 6.7.
+
+
+6.9 Szenario: Wasserstoffatom (Bahn klein)
+------------------------------------------
+
+Taste: [9]
+A    : 100%
+
+Dieses Szenario ist außer dem Elektronenabstand von 0,5*10^(-10)m
+und der Startgeschwindigkeit von 3,46*10^11m/s das gleiche wie 6.7.
+Trotz des kleinen Radius ist dieses Wasserstoffatom immer noch
+doppelt so groß wie ein "echtes" Wasserstoffatom.
+
+
+6.10 Szenario: Metallgitter
+---------------------------
+
+Taste: [0]
+A    : 50%
+
+In diesem Szenario wird ein Metallgitter nachgestellt. Ein regelmä-
+ßiges 4x4x4 Protonengitter mit den Abständen 1*10^(-9)m horizontal,
+6*10^(-10)m vertikal und 9,33*10^(-10)m in die Tiefe bildet die po-
+sitiven Atomrümpfe. Die Elektronen, die die Elektronenwolke bilden,
+werden zufällig im Gitter verteilt. Sie besitzen zu Beginn bereits
+über den Zufallsgenerator errechnete Geschwindigkeiten.
+Besonderheiten, welche hier beobachtet werden können, sind zu-
+fällige und kurzzeitige Bildungen von Wasserstoffatomen. Des Weite-
+ren ist mit der Zeit erkennbar, dass sich die regelmäßige Gitter-
+struktur der Protonen auflöst. Hier kann, wie in Kapitel 6.3, über
+die Grenzen der klassischen Elektrodynamik sowie über die Grenzen
+dieses Modells gesprochen werden. Eine Erwähnung könnte hier auch
+das Bändermodell der Festkörperphysik finden.
